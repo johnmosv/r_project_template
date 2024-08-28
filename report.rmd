@@ -1,0 +1,45 @@
+---
+title: "Report"
+author: "JMS"
+date: "`r as.character(Sys.Date())`"
+output: 
+  word_document:
+    toc: true
+    toc_depth: 4
+    number_sections: true
+    pandoc_args: ['-F', 'zotref.py', '--citeproc']
+  html_document:
+    theme: "sandstone"
+    toc: true
+    toc_depth: 4
+    toc_float: 
+      collapsed: false
+      smooth_scroll: true
+    number_sections: true
+    css: "style.css"
+    pandoc_args: ['-F', 'zotref.py', '--citeproc']
+params:
+  format_out: "html"
+  children: true
+  message: true
+  warning: true
+bibliography: zotcite.bib
+---
+
+```{r settings, include=FALSE}
+source("utils/setup.R")
+
+options(knitr.table.format = ifelse(params$format_out == "html", "html", "simple"))
+
+knitr::opts_knit$set(root.dir = rprojroot::find_root_file(criterion = ".git/index"))
+```
+
+# Children
+```{r child="children/child1.rmd"}
+
+```
+# References
+
+<div id="refs"></div>
+
+
