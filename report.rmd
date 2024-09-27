@@ -9,15 +9,7 @@ output:
     number_sections: true
     pandoc_args: ['-F', 'zotref.py', '--citeproc']
   html_document:
-    theme: "sandstone"
-    toc: true
-    toc_depth: 4
-    toc_float: 
-      collapsed: false
-      smooth_scroll: true
-    number_sections: true
-    css: "style.css"
-    pandoc_args: ['-F', 'zotref.py', '--citeproc']
+   pandoc_args: ['-F', 'zotref.py', '--citeproc']
 params:
   format_out: "html"
   children: true
@@ -28,18 +20,39 @@ bibliography: zotcite.bib
 
 ```{r settings, include=FALSE}
 source("utils/setup.R")
-
 options(knitr.table.format = ifelse(params$format_out == "html", "html", "simple"))
-
 knitr::opts_knit$set(root.dir = rprojroot::find_root_file(criterion = ".git/index"))
 ```
 
+# Aim
+The aim of the study
+
+
 # Children
-```{r child="children/child1.rmd"}
 
+If you want to include child documents, set `params$children` to `true` in the YAML header.
+Calling chunk must be empty.
+
+```{r child="children/child1.rmd", include=params$children}
 ```
-# References
 
+## Data
+
+Should be stored in `data/` folder. List the files below.
+
+```{r data}
+list.files("data")
+```
+
+## Population
+
+The population is based on barn and not on graviditet (if i understand it correctly)
+
+## Create variables
+
+
+# References
+If you want to include references. Requires zotref to be installed (from `nvim-R` or `zocite.nvim`)
 <div id="refs"></div>
 
 

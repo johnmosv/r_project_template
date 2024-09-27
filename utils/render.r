@@ -12,6 +12,8 @@ render_fun <- function(file, output_dir, inter_dir = "reports/.cache", format_ou
       toc = TRUE,
       toc_depth = 4,
       toc_float = FALSE,
+      smooth_scroll = FALSE,
+      number_sections = TRUE,
       theme = "sandstone",
       code_folding = "hide",
       css = "style.css"
@@ -39,5 +41,5 @@ render_fun <- function(file, output_dir, inter_dir = "reports/.cache", format_ou
   )
 }
 render_report <- function(...) {
-  render_fun(file = "report.rmd", output_dir = "study_reports", ...)
+  render_fun(file = "report.rmd", output_dir = "reports/", ...)
 }
