@@ -67,39 +67,41 @@ options(width = 300)
 table_dt <- function(...) {
   johnmosvr::table_dt(..., title_row_names = FALSE, title_col_names = FALSE)
 }
-
 # ggplot2
 theme_set(theme_classic(base_size = 18))
 
+# Define a custom palette with 15 colors
+custom_palette <- c(
+  "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e",
+  "#e6ab02", "#a6761d", "#666666", "#8dd3c7", "#ffffb3",
+  "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69"
+)
+
 # discrete
-scale_colour_brewer_d <- function(..., palette = "Dark2") {
-  scale_colour_brewer(..., palette = palette)
+scale_colour_custom_d <- function(...) {
+  scale_colour_manual(..., values = custom_palette)
 }
 
-scale_fill_brewer_d <- function(..., palette = "Dark2") {
-  scale_fill_brewer(..., palette = palette)
+scale_fill_custom_d <- function(...) {
+  scale_fill_manual(..., values = custom_palette)
 }
 
 options(
-  ggplot2.discrete.colour = scale_colour_brewer_d,
-  ggplot2.discrete.fill = scale_fill_brewer_d
+  ggplot2.discrete.colour = scale_colour_custom_d,
+  ggplot2.discrete.fill = scale_fill_custom_d
 )
+
 # continuous
-scale_colour_brewer_c <- function(..., palette = "Dark2") {
-  scale_colour_distiller(..., palette = palette)
+scale_colour_custom_c <- function(...) {
+  scale_colour_gradientn(..., colors = custom_palette)
 }
 
-scale_fill_brewer_c <- function(..., palette = "Dark2") {
-  scale_fill_distiller(..., palette = palette)
+scale_fill_custom_c <- function(...) {
+  scale_fill_gradientn(..., colors = custom_palette)
 }
 
 options(
-  ggplot2.continuous.colour = scale_colour_brewer_c,
-  ggplot2.continuous.fill = scale_fill_brewer_c
+  ggplot2.continuous.colour = scale_colour_custom_c,
+  ggplot2.continuous.fill = scale_fill_custom_c
 )
 
-# the defult fill color
-default_colors <- RColorBrewer::brewer.pal(name = "Dark2", n = 3)
-default_col <- default_colors[1]
-update_geom_defaults("col", list(fill = default_col))
-update_geom_defaults("bar", list(fill = default_col))
